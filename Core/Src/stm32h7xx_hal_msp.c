@@ -61,6 +61,7 @@
 /**
   * Initializes the Global MSP.
   */
+__attribute__((annotate("no_instrument")))
 void HAL_MspInit(void)
 {
   /* USER CODE BEGIN MspInit 0 */
@@ -82,6 +83,7 @@ void HAL_MspInit(void)
 * @param huart: UART handle pointer
 * @retval None
 */
+__attribute__((annotate("no_instrument")))
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 {
   GPIO_InitTypeDef  GPIO_InitStruct = {0};
@@ -124,6 +126,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
 * @param huart: UART handle pointer
 * @retval None
 */
+__attribute__((annotate("no_instrument")))
 void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 {
 /*##-1- Reset peripherals ##################################################*/

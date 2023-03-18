@@ -23,7 +23,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#if ENABLE_FUZZ
+#include "fuzz.h"
+#endif
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,6 +120,10 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 
+#if ENABLE_FUZZ
+  FuzzStart();
+#endif
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -153,6 +159,7 @@ int main(void)
   * @param  None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
@@ -235,6 +242,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 static void MX_USART1_UART_Init(void)
 {
   /* USER CODE BEGIN USART1_Init 0 */
@@ -276,6 +284,7 @@ static void MX_USART1_UART_Init(void)
   * @param None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 static void MX_GPIO_Init(void)
 {
 
@@ -290,6 +299,7 @@ static void MX_GPIO_Init(void)
   * @param  None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 UART_DISPLAY
 {
   /* Place your implementation of fputc here */
@@ -305,6 +315,7 @@ UART_DISPLAY
   * @param  None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 void MPU_Config(void)
 {
   MPU_Region_InitTypeDef MPU_InitStruct = {0};
@@ -367,6 +378,7 @@ void MPU_Config(void)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */

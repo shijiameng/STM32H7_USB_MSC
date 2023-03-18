@@ -41,15 +41,18 @@ char **environ = __env;
 
 
 /* Functions */
+__attribute__((annotate("no_instrument")))
 void initialise_monitor_handles()
 {
 }
 
+__attribute__((annotate("no_instrument")))
 int _getpid(void)
 {
   return 1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _kill(int pid, int sig)
 {
   (void)pid;
@@ -58,12 +61,14 @@ int _kill(int pid, int sig)
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 void _exit (int status)
 {
   _kill(status, -1);
   while (1) {}    /* Make sure we hang here */
 }
 
+__attribute__((annotate("no_instrument")))
 __attribute__((weak)) int _read(int file, char *ptr, int len)
 {
   (void)file;
@@ -77,6 +82,7 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
   return len;
 }
 
+__attribute__((annotate("no_instrument")))
 __attribute__((weak)) int _write(int file, char *ptr, int len)
 {
   (void)file;
@@ -89,13 +95,14 @@ __attribute__((weak)) int _write(int file, char *ptr, int len)
   return len;
 }
 
+__attribute__((annotate("no_instrument")))
 int _close(int file)
 {
   (void)file;
   return -1;
 }
 
-
+__attribute__((annotate("no_instrument")))
 int _fstat(int file, struct stat *st)
 {
   (void)file;
@@ -103,12 +110,14 @@ int _fstat(int file, struct stat *st)
   return 0;
 }
 
+__attribute__((annotate("no_instrument")))
 int _isatty(int file)
 {
   (void)file;
   return 1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _lseek(int file, int ptr, int dir)
 {
   (void)file;
@@ -117,6 +126,7 @@ int _lseek(int file, int ptr, int dir)
   return 0;
 }
 
+__attribute__((annotate("no_instrument")))
 int _open(char *path, int flags, ...)
 {
   (void)path;
@@ -125,6 +135,7 @@ int _open(char *path, int flags, ...)
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _wait(int *status)
 {
   (void)status;
@@ -132,6 +143,7 @@ int _wait(int *status)
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _unlink(char *name)
 {
   (void)name;
@@ -139,12 +151,14 @@ int _unlink(char *name)
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _times(struct tms *buf)
 {
   (void)buf;
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _stat(char *file, struct stat *st)
 {
   (void)file;
@@ -152,6 +166,7 @@ int _stat(char *file, struct stat *st)
   return 0;
 }
 
+__attribute__((annotate("no_instrument")))
 int _link(char *old, char *new)
 {
   (void)old;
@@ -160,12 +175,14 @@ int _link(char *old, char *new)
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _fork(void)
 {
   errno = EAGAIN;
   return -1;
 }
 
+__attribute__((annotate("no_instrument")))
 int _execve(char *name, char **argv, char **env)
 {
   (void)name;

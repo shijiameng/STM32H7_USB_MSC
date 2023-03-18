@@ -23,6 +23,9 @@
 #include "stm32h7xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#if ENABLE_FUZZ
+#include "fuzz.h"
+#endif
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -80,10 +83,13 @@ void NMI_Handler(void)
 /**
   * @brief This function handles Hard fault interrupt.
   */
+__attribute__((annotate("interruptHandler")))
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
-
+#if ENABLE_FUZZ
+  FuzzAbort();
+#endif
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {
@@ -95,10 +101,13 @@ void HardFault_Handler(void)
 /**
   * @brief This function handles Memory management fault.
   */
+__attribute__((annotate("interruptHandler")))
 void MemManage_Handler(void)
 {
   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
-
+#if ENABLE_FUZZ
+  FuzzAbort();
+#endif
   /* USER CODE END MemoryManagement_IRQn 0 */
   while (1)
   {
@@ -110,10 +119,13 @@ void MemManage_Handler(void)
 /**
   * @brief This function handles Pre-fetch fault, memory access fault.
   */
+__attribute__((annotate("interruptHandler")))
 void BusFault_Handler(void)
 {
   /* USER CODE BEGIN BusFault_IRQn 0 */
-
+#if ENABLE_FUZZ
+  FuzzAbort();
+#endif
   /* USER CODE END BusFault_IRQn 0 */
   while (1)
   {
@@ -125,10 +137,13 @@ void BusFault_Handler(void)
 /**
   * @brief This function handles Undefined instruction or illegal state.
   */
+__attribute__((annotate("interruptHandler")))
 void UsageFault_Handler(void)
 {
   /* USER CODE BEGIN UsageFault_IRQn 0 */
-
+#if ENABLE_FUZZ
+  FuzzAbort();
+#endif
   /* USER CODE END UsageFault_IRQn 0 */
   while (1)
   {
@@ -140,6 +155,7 @@ void UsageFault_Handler(void)
 /**
   * @brief This function handles System service call via SWI instruction.
   */
+__attribute__((annotate("no_instrument")))
 void SVC_Handler(void)
 {
   /* USER CODE BEGIN SVCall_IRQn 0 */
@@ -153,6 +169,7 @@ void SVC_Handler(void)
 /**
   * @brief This function handles Debug monitor.
   */
+__attribute__((annotate("no_instrument")))
 void DebugMon_Handler(void)
 {
   /* USER CODE BEGIN DebugMonitor_IRQn 0 */
@@ -166,6 +183,7 @@ void DebugMon_Handler(void)
 /**
   * @brief This function handles Pendable request for system service.
   */
+__attribute__((annotate("no_instrument")))
 void PendSV_Handler(void)
 {
   /* USER CODE BEGIN PendSV_IRQn 0 */
@@ -179,6 +197,7 @@ void PendSV_Handler(void)
 /**
   * @brief This function handles System tick timer.
   */
+__attribute__((annotate("no_instrument")))
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
@@ -202,6 +221,7 @@ void SysTick_Handler(void)
 * @param  None
 * @retval None
 */
+__attribute__((annotate("interruptHandler")))
 void OTG_HS_IRQHandler(void)
 {
   /* USER CODE BEGIN OTG_HS_IRQn 0 */

@@ -598,6 +598,9 @@ USBH_StatusTypeDef USBH_Process(USBH_HandleTypeDef *phost)
       {
         /* The function shall return USBH_OK when full enumeration is complete */
         USBH_UsrLog("Enumeration done.");
+#if ENABLE_FUZZ
+        FuzzFinish();
+#endif
 
         phost->device.current_interface = 0U;
 

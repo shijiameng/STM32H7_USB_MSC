@@ -54,6 +54,7 @@ ApplicationTypeDef Appli_state = APPLICATION_IDLE;
   * @brief USB Clock Configuration
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 void USBH_Clock_Config(void)
 {
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};

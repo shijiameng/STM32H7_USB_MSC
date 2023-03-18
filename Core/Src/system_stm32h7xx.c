@@ -136,6 +136,7 @@
   * @param  None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 void SystemInit (void)
 {
 #ifdef DATA_IN_CD_AHB_SRAM
@@ -253,6 +254,7 @@ void SystemInit (void)
   * @param  None
   * @retval None
   */
+__attribute__((annotate("no_instrument")))
 void SystemCoreClockUpdate (void)
 {
   uint32_t pllp, pllsource, pllm, pllfracen, hsivalue, tmp;
