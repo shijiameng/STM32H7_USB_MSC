@@ -19,6 +19,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_ctlreq.h"
 
+#if ENABLE_FUZZ
+unsigned char DeviceTestCaseBuffer[208] __attribute__((section(".noinit")));
+unsigned int TestCaseLen __attribute__((section(".noinit")));
+unsigned int TestCaseIdx;
+#endif
+
 /** @addtogroup USBH_LIB
   * @{
   */
@@ -897,6 +903,14 @@ static USBH_StatusTypeDef USBH_HandleControl(USBH_HandleTypeDef *phost)
       phost->Control.timer = (uint16_t)phost->Timer;
       (void)USBH_CtlReceiveData(phost, phost->Control.buff,
                                 phost->Control.length, phost->Control.pipe_in);
+#if ENABLE_FUZZ
+      if (phost->EnumState < ENUM_GET_MFC_STRING_DESC) {
+        if (TestCaseIdx + phost->Control.length <= TestCaseLen) {
+          memcpy(phost->Control.buff, DeviceTestCaseBuffer + TestCaseIdx, phost->Control.length);
+          TestCaseIdx += phost->Control.length;
+        }
+      }
+#endif
 
       phost->Control.state = CTRL_DATA_IN_WAIT;
       break;
