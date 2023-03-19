@@ -26,6 +26,10 @@
 
 /* USER CODE BEGIN Includes */
 
+#if ENABLE_FUZZ
+#include "fuzz.h"
+#endif
+
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN PV */
@@ -102,6 +106,9 @@ void USBH_MSC_AppProcess(void)
     /* Read and Write File Here */
     if(Appli_state == APPLICATION_READY)
     {
+#if ENABLE_FUZZ
+      FuzzFinish();
+#endif
       USBH_UsrLog("\n\n*** Files operations ***\n");
       msc_app_state = MSC_APP_EXPLORER;
       if(msc_file_operations() != 0)
